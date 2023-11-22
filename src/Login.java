@@ -13,19 +13,14 @@ public class Login extends JPanel {
     private JTextArea text;
     private JTextArea textOr;
     private JButton title;
-    Color siennaColor = new Color( 255
-    		,153
-    		 ,051);
+    Color siennaColor = new Color(255, 53, 051);
     public Login() {
         setBounds(750, 200, 400, 410);
-        
         setBackground(Color.WHITE);
         setLayout(null); // 절대 위치 지정
         
-
-        // 
         usernameField = createTextField("  전화번호, 사용자 이름 또는 이메일",200-150, 210-100+10, 300, 50);
-        passwordField = createPasswordField("                    ",200-150, 260-100+10, 300, 50);
+        passwordField = createPasswordField("       ",200-150, 260-100+10, 300, 50);
         // 텍스트 상자
         usernameField.addFocusListener(new FocusListener() {
             @Override
@@ -47,14 +42,14 @@ public class Login extends JPanel {
             @Override
             public void focusGained(FocusEvent e) {
                 if (passwordField.getText().equals("                    ")) {
-                   passwordField.setText("");
+                	passwordField.setText("");
                 }
             }
 
             @Override
             public void focusLost(FocusEvent e) {
                 if (passwordField.getText().isEmpty()) {
-                   passwordField.setText("                    ");
+                	passwordField.setText("                    ");
                 } 
             }
         });
@@ -65,7 +60,7 @@ public class Login extends JPanel {
         login.setContentAreaFilled(true);
         text = createTextArea("계정이 없으신가요",250-150, 425-100+10, 100, 50);
         signUp = createButton("회원가입", 350-140, 420-100+10, 100, 30);
-        title = createimgButton("images/Petdabang.jpg", 200-115, 25+10, 230, 70);
+        title = createimgButton("/Users/choiminwoo/Desktop/KSNU_JProject-main/java_project/images/title.png", 200-115, 25+10, 230, 70);
         textOr = createTextArea("  또는",330-150, 390-100+10, 40, 30);
         
 
@@ -80,32 +75,29 @@ public class Login extends JPanel {
         login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	
-                   Menu menu = new Menu();
-                    JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(Login.this);
-                    menu.setVisible(true);
-                    frame.dispose();
-                    frame.setContentPane(menu);
-                    frame.revalidate();
-                    frame.repaint();
+            	Menu menu = new Menu();
+                JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(Login.this);
+                menu.setVisible(true);
+                frame.dispose();
+                frame.add(menu);
+                frame.revalidate();
+                frame.repaint();
                 
             }
+            
         });
         
         signUp.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               Menu menu = new Menu();
+                Sign_up sign_up = new Sign_up();
                 JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(Login.this);
-                menu.setVisible(true);
-                frame.dispose();
-                frame.setContentPane(menu);
+                sign_up.setVisible(true);
+                //frame.dispose();
+                frame.setContentPane(sign_up); // Set Sign_up as the content pane
                 frame.revalidate();
                 frame.repaint();
-                
-              
             }
-            
         });
         
         
@@ -163,11 +155,9 @@ public class Login extends JPanel {
         int bottomX = 399;
         int bottomY = 409;
 
+        g.drawLine(topX+50, bottomY-100, bottomX-50, bottomY-100);
         g.drawLine(topX, topY, topX, bottomY); // 왼쪽 세로선
         g.drawLine(topX, topY, bottomX, topY); // 위 가로선
-
-        g.drawLine(topX+50, bottomY-100, bottomX-50, bottomY-100);
-        
         
         g.drawLine(bottomX, topY, bottomX, bottomY); // 오른쪽 세로선
         g.drawLine(topX, bottomY, bottomX, bottomY); // 아래 가로선
