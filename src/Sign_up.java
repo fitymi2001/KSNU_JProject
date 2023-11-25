@@ -61,10 +61,19 @@ public class Sign_up extends JPanel {
         });
         signUpButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                signUp();
-            }
-        });
+       
+             public void actionPerformed(ActionEvent e) {
+            	Menu menu = new Menu();
+                JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(Sign_up.this);
+                menu.setVisible(true);
+                frame.dispose();
+                frame.add(menu);
+                frame.revalidate();
+                frame.repaint();
+                
+                }
+                
+            });
     }
 
     private JTextField createTextField(String text, int x, int y, int width, int height) {

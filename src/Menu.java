@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-class Menu extends JFrame {
+public class Menu extends JFrame {
     private JButton home;
     private JButton home1;
     private JButton search;
@@ -18,6 +18,7 @@ class Menu extends JFrame {
     private JButton logout1;
     private JButton item;
     private JButton item1;
+    private Item itemPanel;
 
     Menu() {
         this.setResizable(false);
@@ -54,6 +55,7 @@ class Menu extends JFrame {
         logout = createButton("images/logout_button1.png", 10, 790, 50, 50);
         logout1 = createButton("images/logout_button2.png", 10, 790, 50, 50);
         
+        itemPanel = new Item();
         
         panel.add(logo);
         panel.add(logoB);
@@ -63,17 +65,16 @@ class Menu extends JFrame {
         panel.add(item);
         panel.add(profile);
         panel.add(logout);
+        
+        
+
 
         this.add(panel, BorderLayout.CENTER);
         
+        
+        item.addActionListener(createItemActionListener(item, item1, panel));
         // home 버튼 클릭 이벤트 처리
-        home.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                panel.remove(home);
-                panel.add(home1);
-                panel.repaint();
-            }
-        });
+       
 
         // home 버튼 마우스 이벤트 처리
         home.addMouseListener(new MouseAdapter() {
@@ -88,14 +89,8 @@ class Menu extends JFrame {
             }
         });
 
-        // search 버튼 클릭 이벤트 처리
-        search.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                panel.remove(search);
-                panel.add(search1);
-                panel.repaint();
-            }
-        });
+        
+        
 
         // search 버튼 마우스 이벤트 처리
         search.addMouseListener(new MouseAdapter() {
@@ -111,13 +106,7 @@ class Menu extends JFrame {
         });
 
         // hospital 버튼 클릭 이벤트 처리
-        hospital.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                panel.remove(hospital);
-                panel.add(hospital1);
-                panel.repaint();
-            }
-        });
+       
 
         // hospital 버튼 마우스 이벤트 처리
         hospital.addMouseListener(new MouseAdapter() {
@@ -145,15 +134,8 @@ class Menu extends JFrame {
             }
         });
         
-     // logout 버튼 클릭 이벤트 처리
-        logout.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                panel.remove(logout);
-                panel.add(logout1);
-                panel.repaint();
-                // logout 버튼 클릭 이벤트를 처리할 코드를 추가하세요
-            }
-        });
+     
+        
         
      // logout 버튼 마우스 이벤트 처리
         logout.addMouseListener(new MouseAdapter() {
@@ -168,14 +150,7 @@ class Menu extends JFrame {
             }
         });
         
-        item.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                panel.remove(item);
-                panel.add(item1);
-                panel.repaint();
-                // Add your code to handle the "item" button click event here
-            }
-        });
+        
         
         item.addMouseListener(new MouseAdapter() {
             @Override
@@ -188,10 +163,26 @@ class Menu extends JFrame {
                 item.setIcon(new ImageIcon("images/item_button1.png"));
             }
         });
+    }
+        
+        
         
      
-        
+    private ActionListener createItemActionListener(JButton button, JButton button1, MyPanel panel) {
+        return new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                panel.remove(button);
+                panel.add(button1);
+                panel.repaint();
+
+                itemPanel.setBounds(76, 81, 800, 600 * 8 / 5);
+                panel.add(itemPanel);
+                itemPanel.setVisible(true);
+            }
+        };
     }
+    
+    
 
     private JButton createButton(String imagePath, int x, int y, int width, int height) {
         JButton button = new JButton(new ImageIcon(imagePath));

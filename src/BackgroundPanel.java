@@ -23,6 +23,6 @@ class BackgroundPanel extends JPanel {
         add(backgroundLabel);
 
         // Set the background color of the panel
-        setBackground(Color.WHITE);
+        setBackground(Color.white);
     }
 }
